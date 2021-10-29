@@ -5,6 +5,16 @@
 
 Go library that stores data in Redis with SQL-like schema. The goal of this library is we can store data in Redis with table form.
 
+## What is ```gosqlredis``` user for
+- Cache data effectively without data duplication in Redis
+- Store data table in memory database
+
+## How to use
+
+```shell
+go get -u github.com/kaharman/gosqlredis
+```
+
 ## What you need
 
 1. Golang struct with Redis tag
@@ -16,10 +26,6 @@ Go library that stores data in Redis with SQL-like schema. The goal of this libr
 2. ```time``` data type
 2. ```database/sql``` data type
 
-## How to use
-
-   ```go get -u github.com/kaharman/gosqlredis```
-
 ## License
 
-gosqlredis is available under the [Apache License, Version 2.0](http://www.apache.org/licenses/LICENSE-2.0.html).
+```gosqlredis``` is available under the [Apache License, Version 2.0](http://www.apache.org/licenses/LICENSE-2.0.html).
