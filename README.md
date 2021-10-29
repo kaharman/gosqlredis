@@ -5,7 +5,7 @@
 
 Go library that stores data in Redis with SQL-like schema. The goal of this library is we can store data in Redis with table form.
 
-## What is ```gosqlredis``` user for
+## What is gosqlredis used for
 - Cache data effectively without data duplication in Redis
 - Store data table in memory database
 
