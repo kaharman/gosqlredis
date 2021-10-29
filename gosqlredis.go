@@ -15,18 +15,25 @@ import (
 	"github.com/gomodule/redigo/redis"
 )
 
+// IndexType determine is it index with number type or string type
 type IndexType string
 
 const (
+	// String is string type
 	String IndexType = "string"
+
+	// Number is number type
 	Number IndexType = "number"
 )
 
+// Index structure with index name and index type
 type Index struct {
 	Name string
 	Type IndexType
 }
 
+// GetListRedisDataToStructSorted get multi row data with sorted functionality
+// save to data structure
 func GetListRedisDataToStructSorted(redisPool *redis.Pool, redisDatabase uint64, keyTable string, sqlStruct interface{}, desc bool, index Index, limit int, offset int) (int64, interface{}, error) {
 	pool := redisPool.Get()
 	defer pool.Close()
@@ -71,8 +78,8 @@ func GetListRedisDataToStructSorted(redisPool *redis.Pool, redisDatabase uint64,
 
 	var result []interface{}
 	for _, id := range listID {
-		newSqlStruct := reflect.New(reflect.ValueOf(sqlStruct).Elem().Type()).Interface()
-		sqlData, err := GetRedisDataToStruct(redisPool, redisDatabase, keyTable, newSqlStruct, strconv.FormatInt(id, 10))
+		newSQLStruct := reflect.New(reflect.ValueOf(sqlStruct).Elem().Type()).Interface()
+		sqlData, err := GetRedisDataToStruct(redisPool, redisDatabase, keyTable, newSQLStruct, strconv.FormatInt(id, 10))
 		if err != nil {
 			return 0, nil, err
 		}
@@ -83,6 +90,7 @@ func GetListRedisDataToStructSorted(redisPool *redis.Pool, redisDatabase uint64,
 	return total, result, nil
 }
 
+// GetListRedisDataToStruct get multi row data save to data structure
 func GetListRedisDataToStruct(redisPool *redis.Pool, redisDatabase uint64, keyTable string, sqlStruct interface{}) (int64, interface{}, error) {
 	pool := redisPool.Get()
 	defer pool.Close()
@@ -115,6 +123,7 @@ func GetListRedisDataToStruct(redisPool *redis.Pool, redisDatabase uint64, keyTa
 	return total, result, nil
 }
 
+// GetRedisDataToStruct get single data save to data structure
 func GetRedisDataToStruct(redisPool *redis.Pool, redisDatabase uint64, keyTable string, sqlStruct interface{}, id string) (interface{}, error) {
 	pool := redisPool.Get()
 	defer pool.Close()
@@ -211,6 +220,7 @@ func GetRedisDataToStruct(redisPool *redis.Pool, redisDatabase uint64, keyTable 
 	return sqlData, nil
 }
 
+// InsertSQLDataToRedis insert data from structured data into Redis
 func InsertSQLDataToRedis(redisPool *redis.Pool, sqlData interface{}, redisDatabase uint64, keyTable string, id string, index ...Index) error {
 	pool := redisPool.Get()
 	defer pool.Close()
@@ -293,6 +303,7 @@ func InsertSQLDataToRedis(redisPool *redis.Pool, sqlData interface{}, redisDatab
 	return nil
 }
 
+// DeleteDataRedis delete single data from Redis
 func DeleteDataRedis(redisPool *redis.Pool, redisDatabase uint64, keyTable string, id string, index ...Index) error {
 	pool := redisPool.Get()
 	defer pool.Close()
@@ -335,6 +346,7 @@ func DeleteDataRedis(redisPool *redis.Pool, redisDatabase uint64, keyTable strin
 	return nil
 }
 
+// ClearDataRedis clear all data table in Redis
 func ClearDataRedis(redisPool *redis.Pool, redisDatabase uint64, keyTable string) error {
 	pool := redisPool.Get()
 	defer pool.Close()
