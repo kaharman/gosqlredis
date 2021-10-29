@@ -1,8 +1,9 @@
 # gosqlredis
 
-Go library that stores data in Redis with SQL-like schema. The goal of this library is we can store data in Redis with table form.
-
 [![Go Reference](https://pkg.go.dev/badge/github.com/kaharman/gosqlredis.svg)](https://pkg.go.dev/github.com/kaharman/gosqlredis)
+[![Build](https://github.com/kaharman/gosqlredis/actions/workflows/build.yml/badge.svg)](https://github.com/kaharman/gosqlredis/actions/workflows/build.yml)
+
+Go library that stores data in Redis with SQL-like schema. The goal of this library is we can store data in Redis with table form.
 
 ## What you need
 
