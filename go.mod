@@ -1,4 +1,4 @@
-module gosqlredis
+module github.com/kaharman/gosqlredis
 
 go 1.16
 
